@@ -39,7 +39,7 @@ func (repo *ConsignmentRepository) GetAll() []*pb.Consignment {
 // to give you a better idea.
 type service struct {
 	repo         Repository
-	vesselClient vesselProto.VesselServiceClient
+	vesselClient vesselProto.VesselService
 }
 
 // CreateConsignment - we created just one method on our service,
@@ -93,7 +93,7 @@ func main() {
 		micro.Version("latest"),
 	)
 
-	vesselClient := vesselProto.NewVesselServiceClient("go.micro.srv.vessel", srv.Client())
+	vesselClient := vesselProto.NewVesselService("go.micro.srv.vessel", srv.Client())
 
 	// Init will parse the command line flags.
 	srv.Init()
