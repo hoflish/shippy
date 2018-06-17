@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	address         = "localhost:50051"
+	address         = "192.168.99.100:50051"
 	defaultFilename = "consignment.json"
 )
 
