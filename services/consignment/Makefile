@@ -1,6 +1,7 @@
 build:
-	protoc -I. --go_out=plugins=grpc:$(GOPATH)/src/github.com/hoflish/shippy/services/consignment \
-	proto/consignment.proto
+	protoc --proto_path=$(GOPATH)/src/github.com/hoflish/shippy/services/consignment \
+	--micro_out=. \
+	--go_out=. proto/consignment.proto
 
 	docker build -t consignment-service .
 
