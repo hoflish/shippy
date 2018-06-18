@@ -4,6 +4,8 @@ package main
 import (
 	"log"
 
+	"gopkg.in/mgo.v2"
+
 	pb "github.com/hoflish/shippy/services/consignment/proto"
 	vesselProto "github.com/hoflish/shippy/services/vessel/proto"
 	"golang.org/x/net/context"
@@ -15,6 +17,7 @@ import (
 // to give you a better idea.
 type handler struct {
 	vesselClient vesselProto.VesselService
+	session      *mgo.Session
 }
 
 func (s *handler) GetRepo() Repository {

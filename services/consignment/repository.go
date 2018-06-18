@@ -3,6 +3,7 @@ package main
 
 import (
 	pb "github.com/hoflish/shippy/services/consignment/proto"
+	"gopkg.in/mgo.v2"
 )
 
 const (
