@@ -1,0 +1,29 @@
+# docker-compose.yml
+version: '3.4'
+
+services:
+
+  consignment-cli:
+    build: ./cli/consignment
+    environment:
+      MICRO_REGISTRY: "mdns"
+    depends_on:
+      - consignment-service
+      - vessel-service
+
+  consignment-service:
+    build: ./services/consignment
+    ports:
+      - 50051:50051
+    environment:
+      MICRO_ADDRESS: ":50051"
+      MICRO_REGISTRY: "mdns"
+      DB_HOST: "datastore:27017"
+
+  vessel-service:
+    build:  ./services/vessel
+    ports:
+      - 50052:50051
+    environment:
+      MICRO_ADDRESS: ":50051"
+      MICRO_REGISTRY: "mdns"
