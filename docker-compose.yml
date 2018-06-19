@@ -10,6 +10,7 @@ services:
     depends_on:
       - consignment-service
       - vessel-service
+      - datastore
 
   consignment-service:
     build: ./services/consignment
@@ -27,6 +28,7 @@ services:
     environment:
       MICRO_ADDRESS: ":50051"
       MICRO_REGISTRY: "mdns"
+      DB_HOST: "datastore:27017"
 
   datastore:
     image: mongo
