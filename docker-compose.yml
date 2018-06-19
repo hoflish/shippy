@@ -19,7 +19,7 @@ services:
     environment:
       MICRO_ADDRESS: ":50051"
       MICRO_REGISTRY: "mdns"
-      DB_HOST: "datastore:27017"
+      DB_HOST: "192.168.99.100:27017"
 
   vessel-service:
     build:  ./services/vessel
@@ -28,7 +28,7 @@ services:
     environment:
       MICRO_ADDRESS: ":50051"
       MICRO_REGISTRY: "mdns"
-      DB_HOST: "datastore:27017"
+      DB_HOST: "192.168.99.100:27017"
 
   datastore:
     image: mongo

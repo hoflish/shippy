@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	defaultHost = "datastore:27017"
+	defaultHost = "192.168.99.100:27017"
 )
 
 func main() {
