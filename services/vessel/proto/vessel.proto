@@ -1,7 +1,7 @@
 // services/vessel/proto/vessel.proto
 syntax = "proto3";
 
-package go.micro.srv.vessel;
+package vessel;
 
 service VesselService {
   rpc FindAvailable(Specification) returns (Response) {}
