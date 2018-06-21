@@ -2,7 +2,7 @@
 // source: proto/consignment.proto
 
 /*
-Package go_micro_srv_consignment is a generated protocol buffer package.
+Package consignment is a generated protocol buffer package.
 
 It is generated from these files:
 	proto/consignment.proto
@@ -13,7 +13,7 @@ It has these top-level messages:
 	GetRequest
 	Response
 */
-package go_micro_srv_consignment
+package consignment
 
 import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
@@ -58,7 +58,7 @@ func NewShippingService(name string, c client.Client) ShippingService {
 		c = client.NewClient()
 	}
 	if len(name) == 0 {
-		name = "go.micro.srv.consignment"
+		name = "consignment"
 	}
 	return &shippingService{
 		c:    c,

@@ -5,58 +5,45 @@ import (
 )
 
 func TestParseFile(t *testing.T) {
-	consignment, _ := parseFile(defaultFilename)
+	c, _ := parseFile(defaultFilename)
+
+	testCases := []struct {
+		fieldName string
+		got       interface{}
+		want      interface{}
+	}{
+		{fieldName: "Id", got: c.GetId(), want: ""},
+		{fieldName: "Description", got: c.GetDescription(), want: "This is a test consignment"},
+		{fieldName: "VesselId", got: c.GetVesselId(), want: ""},
+		{fieldName: "Weight", got: c.GetWeight(), want: int32(55000)},
+		{fieldName: "Containers", got: len(c.GetContainers()), want: 3},
+	}
 
 	assertCorrectMessage := func(t *testing.T, got interface{}, want interface{}) {
 		t.Helper()
 		switch got.(type) {
 		case string:
 			if got != want {
-				t.Errorf("Got: %s, wanted: %s", got, want)
+				t.Errorf("%#v Got %s wanted %s", c, got, want)
 			}
 		case int32:
 		case int:
 			if got != want {
-				t.Errorf("Got: %d, wanted: %d", got, want)
+				t.Errorf("%#v Got %d wanted %d", c, got, want)
 			}
 		}
 
 	}
-	t.Run("Consignment Id", func(t *testing.T) {
-		got := consignment.GetId()
-		want := ""
-		assertCorrectMessage(t, got, want)
-	})
 
-	t.Run("Consignment Description", func(t *testing.T) {
-		got := consignment.GetDescription()
-		want := "This is a test consignment"
-		assertCorrectMessage(t, got, want)
-	})
-
-	t.Run("Consignment Weight", func(t *testing.T) {
-		got := consignment.GetWeight()
-		want := int32(55000)
-		assertCorrectMessage(t, got, want)
-	})
-
-	t.Run("Consignment Containers", func(t *testing.T) {
-		got := len(consignment.GetContainers())
-		want := 3
-		assertCorrectMessage(t, got, want)
-	})
-
-	t.Run("Consignment VesselId", func(t *testing.T) {
-		got := consignment.GetVesselId()
-		want := ""
-		assertCorrectMessage(t, got, want)
-	})
-
+	for _, tt := range testCases {
+		t.Run(tt.fieldName, func(t *testing.T) {
+			assertCorrectMessage(t, tt.got, tt.want)
+		})
+	}
 }
 
-func TestParseFileWithFakeFile(t *testing.T) {
-	consignment, err := parseFile("foo.json")
-
+func TestParseFileWithFakeFileName(t *testing.T) {
+	consignment, err := parseFile("fileNotExist.json")
 	if consignment != nil {
 		t.Error(err)
 	}
