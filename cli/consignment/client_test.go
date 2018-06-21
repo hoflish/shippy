@@ -1,11 +1,13 @@
 package main
 
 import (
+	"path/filepath"
 	"testing"
 )
 
 func TestParseFile(t *testing.T) {
-	c, err := parseFile(defaultFilename)
+	path := filepath.Join("test-fixtures", "consignment_data.json")
+	c, err := parseFile(path)
 
 	ok(t, err)
 
