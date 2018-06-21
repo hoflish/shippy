@@ -1,7 +1,6 @@
 package main
 
 import (
-	"strings"
 	"testing"
 )
 
@@ -12,50 +11,49 @@ const (
 func TestParseFile(t *testing.T) {
 	consignment, _ := parseFile(filename)
 
+	assertCorrectMessage := func(t *testing.T, got interface{}, want interface{}) {
+		t.Helper()
+		switch got.(type) {
+		case string:
+			if got != want {
+				t.Errorf("Got: %s, wanted: %s", got, want)
+			}
+		case int32:
+		case int:
+			if got != want {
+				t.Errorf("Got: %d, wanted: %d", got, want)
+			}
+		}
+
+	}
 	t.Run("Consignment Id", func(t *testing.T) {
 		got := consignment.GetId()
 		want := ""
-
-		if got != want {
-			t.Errorf("Got: %s, wanted: %s", got, want)
-		}
+		assertCorrectMessage(t, got, want)
 	})
 
 	t.Run("Consignment Description", func(t *testing.T) {
 		got := consignment.GetDescription()
-		want := "consignment"
-
-		if !strings.Contains(got, want) {
-			t.Errorf("wanted '%s' to contain '%s' subtring", got, want)
-		}
-
+		want := "This is a test consignment"
+		assertCorrectMessage(t, got, want)
 	})
 
 	t.Run("Consignment Weight", func(t *testing.T) {
 		got := consignment.GetWeight()
 		want := int32(55000)
-
-		if got != want {
-			t.Errorf("Got: %d, wanted: %d", got, want)
-		}
+		assertCorrectMessage(t, got, want)
 	})
 
 	t.Run("Consignment Containers", func(t *testing.T) {
 		got := len(consignment.GetContainers())
 		want := 3
-
-		if got != want {
-			t.Errorf("Got: %d, wanted: %d", got, want)
-		}
+		assertCorrectMessage(t, got, want)
 	})
 
 	t.Run("Consignment VesselId", func(t *testing.T) {
 		got := consignment.GetVesselId()
 		want := ""
-
-		if got != want {
-			t.Errorf("Got: %s, wanted: %s", got, want)
-		}
+		assertCorrectMessage(t, got, want)
 	})
 
 }
