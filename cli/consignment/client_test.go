@@ -53,3 +53,11 @@ func TestParseFile(t *testing.T) {
 	})
 
 }
+
+func TestParseFileWithFakeFile(t *testing.T) {
+	consignment, err := parseFile("foo.json")
+
+	if consignment != nil {
+		t.Error(err)
+	}
+}
