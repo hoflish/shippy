@@ -5,8 +5,13 @@ import (
 	"testing"
 )
 
+type FileOpts struct {
+	FileName string
+}
+
 func TestParseFile(t *testing.T) {
-	path := filepath.Join("test-fixtures", "consignment_data.json")
+	f := FileOpts{FileName: "consignment_data.json"}
+	path := filepath.Join("test-fixtures", f.FileName)
 	c, err := parseFile(path)
 
 	ok(t, err)
@@ -31,7 +36,11 @@ func TestParseFile(t *testing.T) {
 }
 
 func TestParseFileWithFakeFileName(t *testing.T) {
-	consignment, err := parseFile("fileNotExist.json")
+	f := FileOpts{}
+	path := filepath.Join("test-fixtures", f.FileName)
+
+	consignment, err := parseFile(path)
+
 	if consignment != nil {
 		t.Error(err)
 	}
