@@ -4,12 +4,8 @@ import (
 	"testing"
 )
 
-const (
-	filename = "consignment.json"
-)
-
 func TestParseFile(t *testing.T) {
-	consignment, _ := parseFile(filename)
+	consignment, _ := parseFile(defaultFilename)
 
 	assertCorrectMessage := func(t *testing.T, got interface{}, want interface{}) {
 		t.Helper()
